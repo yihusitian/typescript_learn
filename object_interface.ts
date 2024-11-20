@@ -91,5 +91,10 @@ let handleClick: EventHandler = (event: string, data: any): void => {
     console.log('data', data)
 }
 
-handleClick('click', 'data')
+let handleMove: EventHandler = (event: string, data: any): void => {
+    console.log('event', event)
+    console.log('data', data)
+}
 
+handleClick('click', 'data')
+handleMove('move', 'data')
