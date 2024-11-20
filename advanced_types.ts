@@ -117,3 +117,35 @@ function getData() {
 type DataType = ReturnType<typeof getData>
 let t0: DataType = {id: 100, name: '里斯', age: 10}
 console.log(t0)
+
+
+interface BaseResponse {
+    code: number
+    message: string
+}
+
+interface SuccessResponse<T> extends BaseResponse {
+    data: T
+}
+
+interface ErrorResponse extends BaseResponse {
+    error: string
+}
+
+type ResponseData<T> = SuccessResponse<T> | ErrorResponse
+
+interface UserData {
+    id: number
+    name: string
+}
+
+function handleResponse(response: ResponseData<UserData>) {
+    if ('data' in response) {
+        console.log(response.data)
+    } else {
+        console.log(response.error)
+    }
+}
+
+handleResponse({code: 200, message: '成功', data: {id: 1, name: '张三'}})
+handleResponse({code: 400, message: '失败', error: '错误信息'})
